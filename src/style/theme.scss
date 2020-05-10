@@ -1,0 +1,5 @@
+$primary-color: cyan;
+
+@mixin test {
+    background-color: $primary-color;
+}
