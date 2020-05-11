@@ -1,16 +1,39 @@
 @import './theme.scss';
 
-*, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	color: $default-text;
 }
 
 main {
-    position: relative;
-    max-width: 56em;
-    background-color: white;
-    padding: 2em;
-    margin: 0 auto;
-    box-sizing: border-box;
+	position: relative;
+	// max-width: 56em;
+	background-color: white;
+	padding: 2em;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+
+.container {
+	display: flex;
+	max-width: 1200px;
+	margin: 0 auto;
+	width: 100%;
+}
+
+.primary-highlight {
+	color: $primary-color;
+}
+
+hr {
+	background-color: $primary-color;
+	border: none;
+	height: 2px;
 }

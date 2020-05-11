@@ -1,46 +1,136 @@
-<style>
-	h1, figure, p {
-		text-align: center;
-		margin: 0 auto;
-	}
+<script>
+  import ProjectCards from "../components/ProjectCards.svelte";
+  export const featuredProjects = [
+    {
+      title: "Cool Cabinet",
+      author: "Booker Dewitt",
+      image: "./images/project-placeholder.jpg",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+      url: "#",
+      categories: ["Wood Working"]
+    },
+    {
+      title: "Cool Cabinet",
+      author: "Booker Dewitt",
+      image: "./images/project-placeholder.jpg",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+      url: "#",
+      categories: ["Wood Working"]
+    },
+    {
+      title: "Cool Cabinet",
+      author: "Booker Dewitt",
+      image: "./images/project-placeholder.jpg",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+      url: "#",
+      categories: ["Wood Working"]
+    },
+    {
+      title: "Cool Cabinet",
+      author: "Booker Dewitt",
+      image: "./images/project-placeholder.jpg",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+      url: "#",
+      categories: ["Wood Working"]
+    },
+    {
+      title: "Cool Cabinet",
+      author: "Booker Dewitt",
+      image: "./images/project-placeholder.jpg",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+      url: "#",
+      categories: ["Wood Working"]
+    }
+  ];
+</script>
 
-	h1 {
-		font-size: 2.8em;
-		text-transform: uppercase;
-		font-weight: 700;
-		margin: 0 0 0.5em 0;
-	}
+<style lang="scss">
+  @import "../style/theme.scss";
+  section {
+    padding: 6em 0;
+  }
+  .banner {
+    &__wrapper {
+      display: flex;
+      margin: 0 auto;
+    }
+    &__texts {
+      display: flex;
+      flex-direction: column;
+      max-width: 50%;
+      align-self: center;
+      padding-right: 10px;
+      h1 {
+        font-size: 3.3em;
+        text-transform: capitalize;
+        font-weight: 700;
+        margin: 0 0 0.5em 0;
+        text-align: left;
+      }
+      p {
+        font-size: 1.5em;
+        max-width: 80%;
+        color: $grey-300;
+      }
+    }
+    &__image-container {
+      max-width: 50%;
+      img {
+        width: 100%;
+        border-radius: $border-radius-lg;
+      }
+    }
+  }
 
-	figure {
-		margin: 0 0 1em 0;
-	}
-
-	img {
-		width: 100%;
-		max-width: 400px;
-		margin: 0 0 1em 0;
-	}
-
-	p {
-		margin: 1em auto;
-	}
-
-	@media (min-width: 480px) {
-		h1 {
-			font-size: 4em;
-		}
-	}
+  .featured {
+    padding-top: 3em;
+  }
 </style>
 
 <svelte:head>
-	<title>Sapper project template</title>
+  <title>DooIt | Home</title>
 </svelte:head>
 
-<h1>Great success!</h1>
+<section class="banner">
+  <div class="container">
+    <div class="banner__wrapper">
+      <div class="banner__texts">
+        <h1>
+          Document Your
+          <span class="primary-highlight">DIY</span>
+          Projects.
+          <br />
+          Show It Off To The
+          <span class="primary-highlight">World</span>
+          .
+        </h1>
+        <p>
+          <strong>
+            Share Your DIY Passion Projects Across The World Through
+            <span class="primary-highlight">DooIt</span>
+            .
+          </strong>
+        </p>
+      </div>
+      <div class="banner__image-container">
+        <img src="./images/banner-image.jpg" alt="" />
+      </div>
+    </div>
+  </div>
+</section>
 
-<figure>
-	<img alt='Borat' src='great-success.png'>
-	<figcaption>HIGH FIVE!</figcaption>
-</figure>
+<hr />
 
-<p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>
+<section class="featured">
+  <div class="container">
+    <div class="featured__wrapper">
+      <h2>Picked Out For You</h2>
+      <ProjectCards {featuredProjects} />
+    </div>
+  </div>
+</section>

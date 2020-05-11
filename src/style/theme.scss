@@ -1,4 +1,14 @@
-$primary-color: cyan;
+//Default Text
+$default-text: #242424;
+
+// Theme Colors
+$primary-color: #f78b34;
+$secondary-color: #2f8ece;
+
+// Greys
+$grey-300: #575656;
+
+$border-radius-lg: 20px;
 
 @mixin test {
     background-color: $primary-color;
