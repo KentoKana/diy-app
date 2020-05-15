@@ -4,14 +4,15 @@
 const Schema = use('Schema')
 
 class CategorySchema extends Schema {
-  up () {
+  up() {
     this.create('categories', (table) => {
       table.increments()
+      table.string('name').notNullable()
       table.timestamps()
     })
   }
 
-  down () {
+  down() {
     this.drop('categories')
   }
 }

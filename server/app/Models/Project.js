@@ -6,11 +6,11 @@ const Model = use('Model');
 class Project extends Model {
 
     user() {
-        return this.hasOne('App/Models/User');
+        return this.belongsTo('App/Models/User');
     }
 
     categories() {
-        return this.hasMany('App/Models/Category')
+        return this.belongsToMany('App/Models/Category')
     }
 }
 

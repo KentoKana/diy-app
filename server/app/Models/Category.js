@@ -4,6 +4,9 @@
 const Model = use('Model')
 
 class Category extends Model {
+    projects() {
+        return this.belongsToMany('App/Models/Project')
+    }
 }
 
 module.exports = Category
