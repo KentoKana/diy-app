@@ -3,26 +3,36 @@
 
 class UserController {
     User = use('App/Models/User')
-    user = new this.User()
 
     Project = use('App/Models/Project')
-    project = new this.Project()
 
-    index = async () => {
-        return await this.User.all()
+    index = async ({ request, response }) => {
+        const users = await this.User.query().setHidden(['password']).fetch()
+        return response.status(200).json({
+            users: users
+        })
     }
 
-    createUser = async () => {
-        this.user.username = 'Token'
-        this.user.email = 'token@token.com'
-        this.user.password = 'password'
-        await this.user.save()
+    createUser = async ({ request, response }) => {
+        const user = await this.User.create({
+            username: 'Toocan',
+            email: 'toocan@token.com',
+            password: 'password'
+        })
+
+        return response.status(200).json({
+            message: 'Success!',
+            data: user
+        })
     }
 
-    getUserProjects = async () => {
+    getUserProjects = async ({ request, response }) => {
         const projectQuery = await this.Project.query().where('user_id', 2).fetch()
-        return projectQuery
+        return response.status(200).json({
+            userProjects: projectQuery
+        })
     }
+
 }
 
 module.exports = UserController

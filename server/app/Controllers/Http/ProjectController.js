@@ -2,23 +2,29 @@
 
 class ProjectController {
     Project = use('App/Models/Project')
-    project = new this.Project();
-
     User = use('App/Models/User')
-    user = new this.User();
 
-    index = async () => {
-        return await this.Project.all()
+    index = async ({ request, response }) => {
+        const projects = await this.Project.all()
+        response.status(200).json({
+            projects: projects
+        })
     }
 
-    createProject = async () => {
-        const userQuery = await this.User.findBy('id', '1')
-        this.project.name = 'Token\'s project 2'
-        this.project.description = 'project description 2'
-        this.project.thumbnail = 'img.jpg'
-        this.project.user_id = 2
-        this.project.slug = `/${userQuery.$attributes.username.toLowerCase()}/tokens-project2`
-        return await this.project.save()
+    createProject = async ({ request, response }) => {
+        const userQuery = await this.User.findBy('id', '2')
+        const project = await this.Project.create({
+            name: 'Token\'s project 4',
+            description: 'project description 4',
+            thumbnail: 'img.jpg',
+            user_id: 2,
+            slug: `/${userQuery.$attributes.username.toLowerCase()}/tokens-project4`
+        })
+
+        return response.status(200).json({
+            message: "Success!",
+            data: project
+        })
     }
 
 }
