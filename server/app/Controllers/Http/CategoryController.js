@@ -13,7 +13,7 @@ class CategoryController {
     }
 
     createCategory = async () => {
-        this.category.name = "Wood Working"
+        this.category.name = "Furniture"
         return await this.category.save()
     }
 }

@@ -10,7 +10,9 @@ class Project extends Model {
     }
 
     categories() {
-        return this.belongsToMany('App/Models/Category')
+        return this
+            .belongsToMany('App/Models/Category')
+            .pivotTable('project_category')
     }
 }
 

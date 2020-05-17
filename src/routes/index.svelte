@@ -1,52 +1,16 @@
+<script context="module">
+  export function preload({ params, query }) {
+    return this.fetch(`http://localhost:3333/api/projects`)
+      .then(res => res.json())
+      .then(projects => {
+        return { projects };
+      });
+  }
+</script>
+
 <script>
   import ProjectCards from "../components/ProjectCards.svelte";
-  export const featuredProjects = [
-    {
-      title: "Cool Cabinet",
-      author: "Booker Dewitt",
-      image: "./images/project-placeholder.jpg",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
-      url: "#",
-      categories: ["Wood Working"]
-    },
-    {
-      title: "Cool Cabinet",
-      author: "Booker Dewitt",
-      image: "./images/project-placeholder.jpg",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
-      url: "#",
-      categories: ["Wood Working"]
-    },
-    {
-      title: "Cool Cabinet",
-      author: "Booker Dewitt",
-      image: "./images/project-placeholder.jpg",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
-      url: "#",
-      categories: ["Wood Working"]
-    },
-    {
-      title: "Cool Cabinet",
-      author: "Booker Dewitt",
-      image: "./images/project-placeholder.jpg",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
-      url: "#",
-      categories: ["Wood Working"]
-    },
-    {
-      title: "Cool Cabinet",
-      author: "Booker Dewitt",
-      image: "./images/project-placeholder.jpg",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
-      url: "#",
-      categories: ["Wood Working"]
-    }
-  ];
+  export let projects;
 </script>
 
 <style lang="scss">
@@ -130,7 +94,7 @@
   <div class="container">
     <div class="featured__wrapper">
       <h2>Picked Out For You</h2>
-      <ProjectCards {featuredProjects} />
+      <ProjectCards {projects} />
     </div>
   </div>
 </section>

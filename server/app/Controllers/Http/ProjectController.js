@@ -3,12 +3,14 @@
 class ProjectController {
     Project = use('App/Models/Project')
     User = use('App/Models/User')
+    Helpers = use('Helpers')
 
     index = async ({ request, response }) => {
-        const projects = await this.Project.all()
+        const projects = await this.Project.query().with('categories').select('*').fetch()
         response.status(200).json({
             projects: projects
         })
+        // console.log(this.Helpers.publicPath() + "\\\pyramid.png")
     }
 
     createProject = async ({ request, response }) => {
@@ -21,9 +23,12 @@ class ProjectController {
             slug: `/${userQuery.$attributes.username.toLowerCase()}/tokens-project4`
         })
 
+        await project.categories().attach([1, 2])
+
         return response.status(200).json({
             message: "Success!",
-            data: project
+            data: await project,
+            categories: await project.categories().fetch()
         })
     }
 

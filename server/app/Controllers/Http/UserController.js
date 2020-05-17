@@ -3,11 +3,10 @@
 
 class UserController {
     User = use('App/Models/User')
-
     Project = use('App/Models/Project')
 
     index = async ({ request, response }) => {
-        const users = await this.User.query().setHidden(['password']).fetch()
+        const users = await this.User.query().setHidden(['password']).select('categories.name').fetch()
         return response.status(200).json({
             users: users
         })

@@ -18,12 +18,12 @@ const Route = use('Route')
 
 Route.on('/').render('welcome')
 
-Route.get('/users', 'UserController.index')
-Route.get('/projects', 'ProjectController.index')
-Route.get('/user-projects', 'UserController.getUserProjects')
-Route.get('/categories', 'CategoryController.index')
+Route.get('/api/users', 'UserController.index')
+Route.get('/api/projects', 'ProjectController.index')
+Route.get('/api/user-projects', 'UserController.getUserProjects')
+Route.get('/api/categories', 'CategoryController.index')
 
 // Should be posts
-Route.get('/create/user', 'UserController.createUser')
-Route.get('/create/project', 'ProjectController.createProject')
-Route.get('/create/category', 'CategoryController.createCategory')
+Route.get('/api/create/user', 'UserController.createUser')
+Route.get('/api/create/project', 'ProjectController.createProject')
+Route.get('/api/create/category', 'CategoryController.createCategory')
