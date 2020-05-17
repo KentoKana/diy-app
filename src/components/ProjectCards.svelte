@@ -23,14 +23,14 @@
         margin-left: 10px;
         color: #fff;
         font-size: 14px;
-        bottom: 5px;
-        transform: scale(0);
+        bottom: -20px;
+        opacity: 0;
       }
+
       &:hover {
         color: $secondary-color;
         .project-card__texts__description {
-          // height: 100%;
-          transform: scale(1);
+          bottom: 5px;
           opacity: 1;
         }
 
