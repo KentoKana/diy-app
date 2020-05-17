@@ -32,6 +32,28 @@ class UserController {
         })
     }
 
+    login = async ({ auth, request, response }) => {
+        const { email, password } = request.only(['email', 'password'])
+        const token = await auth.attempt(email, password)
+
+        return response.json(token)
+    }
+
+    showAuthenticatedUser = async ({ params, response }) => {
+
+        const user = await this.User.find(params.id)
+        if (user) {
+            return response.status(200).json({
+                user
+            })
+        } else {
+            return {
+                error: "User not found"
+            }
+        }
+
+    }
+
 }
 
 module.exports = UserController

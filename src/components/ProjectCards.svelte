@@ -66,13 +66,14 @@
       padding: 5px 15px;
       color: white;
       border-radius: 30px;
-      font-size: 10px;
+      font-size: 12px;
       border: 1px solid transparent;
+      transition: 0.2s ease all;
+
       &:hover {
         color: $secondary-color;
         background-color: #fff;
         border: 1px solid $secondary-color;
-        transition: 0.2s ease all;
       }
     }
   }
@@ -106,4 +107,3 @@
     <!-- <img runat="server" src="http://localhost:3333/pyramid.png" width="100"> -->
   {/each}
 </div>
-`
