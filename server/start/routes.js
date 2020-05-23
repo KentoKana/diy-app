@@ -22,7 +22,6 @@ Route.get('/api/users', 'UserController.index')
 Route.get('/api/projects', 'ProjectController.index')
 Route.get('/api/user-projects', 'UserController.getUserProjects')
 Route.get('/api/categories', 'CategoryController.index')
-Route.get('/csrf', function* (req, res) { res.cookie("token", "hi") })
 
 // Should be posts
 Route.get('/api/create/user', 'UserController.createUser')
