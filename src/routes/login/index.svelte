@@ -17,18 +17,25 @@
         password: password
       })
     })
-      .then(res => res.json())
       .then(res => {
-        localStorage.setItem("usertoken", res.token);
-        uid = jwtdecode(res.token).uid;
+        return res.json();
+      })
+      .then(res => {
+        if (res.token) {
+          localStorage.setItem("usertoken", res.token);
+          uid = jwtdecode(res.token).uid;
 
-        return fetch(`http://localhost:3333/api/users/${uid}`)
-          .then(res => {
-            return res.json();
-          })
-          .then(res => {
-            return res;
-          });
+          return fetch(`http://localhost:3333/api/users/${uid}`)
+            .then(res => {
+              return res.json();
+            })
+            .then(res => {
+              console.log(res);
+              return res;
+            });
+        }
+        console.log(res);
+        return res;
       });
   };
 </script>

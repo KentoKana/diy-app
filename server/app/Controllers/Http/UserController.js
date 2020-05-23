@@ -1,5 +1,5 @@
 'use strict'
-
+const { validateAll } = use('Validator')
 
 class UserController {
     User = use('App/Models/User')
@@ -33,10 +33,30 @@ class UserController {
     }
 
     login = async ({ auth, request, response }) => {
+        const rules = {
+            email: 'required|email',
+            password: 'required'
+        }
+        const messages = {
+            'email.required': 'Please enter your email',
+            'email.email': 'Please enter a valid email',
+            'password.required': 'Please enter your password'
+        }
+        const validation = await validateAll(request.all(), rules, messages)
+
+        if (validation.fails()) {
+            console.log(await validation.messages())
+
+            const validationMessages = validation.messages();
+            return response.json(
+                validationMessages
+            )
+        }
         const { email, password } = request.only(['email', 'password'])
         const token = await auth.attempt(email, password)
-
+        console.log(token)
         return response.json(token)
+
     }
 
     showAuthenticatedUser = async ({ params, response }) => {
@@ -47,9 +67,9 @@ class UserController {
                 user
             })
         } else {
-            return {
+            return response.status(200).json({
                 error: "User not found"
-            }
+            })
         }
 
     }
