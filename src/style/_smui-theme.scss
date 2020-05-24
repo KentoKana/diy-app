@@ -1,0 +1,10 @@
+@import "@material/theme/color-palette";
+@import "./theme";
+
+// Svelte Colors!
+$mdc-theme-primary: $primary-color;
+$mdc-theme-secondary: $secondary-color;
+$mdc-theme-background: #fff;
+$mdc-theme-surface: #fff;
+
+$mdc-theme-error: $material-color-red-900;
