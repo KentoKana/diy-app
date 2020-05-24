@@ -2,6 +2,7 @@
   import { goto } from "@sapper/app";
   import jwtdecode from "jwt-decode";
   import { isLoggedIn } from "../../stores/store.js";
+  import Textfield from "@smui/textfield";
   let email = "";
   let password = "";
   let inputValues = {
@@ -42,6 +43,7 @@
           })
           .then(res => {
             isLoggedIn.update(status => (status = true));
+            console.log($isLoggedIn);
             return res;
           });
       });
@@ -49,21 +51,19 @@
 </script>
 
 <style lang="scss">
-  @import "../../style/global.scss";
-  .login {
-    .validation-message {
-      color: $danger;
-    }
-  }
+
 </style>
 
+<svelte:head>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+</svelte:head>
 <section class="login">
   <form on:submit|preventDefault={handleSubmit}>
     <div>
-      <div>
-        <label for="email" class="email">E-mail</label>
-      </div>
-      <input
+      <label for="email" class="email">E-mail</label>
+      <Textfield
         type="text"
         placeholder="Please type your username"
         name="email"
@@ -74,9 +74,7 @@
       </div>
     </div>
     <div>
-      <div>
-        <label for="password" class="password">Password</label>
-      </div>
+      <label for="password" class="password">Password</label>
       <input
         type="password"
         placeholder="Please type your password"
