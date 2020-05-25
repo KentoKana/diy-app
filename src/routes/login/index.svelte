@@ -5,6 +5,7 @@
   import { fetchUser } from "../../utils/fetch-data.js";
   import Textfield from "@smui/textfield";
   import Button, { Label } from "@smui/button";
+  import Spinner from "svelte-spinner";
 
   let email = "";
   let password = "";
@@ -14,7 +15,11 @@
   };
   let validationMessages = { email: "", password: "" };
   let uid;
+  let buttonLabel = "Login";
+  let isSubmitting = false;
   const handleSubmit = () => {
+    buttonLabel = "Logging you in...";
+    isSubmitting = true;
     fetch("http://localhost:3333/api/login", {
       method: "post",
       headers: {
@@ -30,6 +35,8 @@
         return res.json();
       })
       .then(res => {
+        buttonLabel = "Login";
+        isSubmitting = false;
         if (!res.token) {
           res.forEach(item => {
             validationMessages[item.field] = item.message;
@@ -63,7 +70,6 @@
       flex-direction: column;
       width: 400px;
       height: 500px;
-      // background-color: grey;
       align-items: center;
       justify-content: center;
       border-radius: $border-radius-lg;
@@ -100,7 +106,6 @@
       <div>
         <Textfield
           type="text"
-          placeholder="Please type your username"
           name="email"
           label="E-mail"
           bind:value={inputValues.email}
@@ -112,7 +117,6 @@
       <div>
         <Textfield
           type="password"
-          placeholder="Please type your password"
           name="password"
           label="Password"
           bind:value={inputValues.password} />
@@ -122,7 +126,7 @@
           {/if}
         </div>
         <div class="submit-button">
-          <Button variant="unelevated" type="submit">Login</Button>
+          <Button disabled={isSubmitting} variant="unelevated" type="submit">{buttonLabel}</Button>
         </div>
       </div>
     </form>
