@@ -1,9 +1,11 @@
 <script>
   import { goto } from "@sapper/app";
   import jwtdecode from "jwt-decode";
-  import { isLoggedIn } from "../../stores/store.js";
+  import { loggedInUser, isLoggedIn } from "../../stores/user-store.js";
+  import { fetchUser } from "../../utils/fetch-data.js";
   import Textfield from "@smui/textfield";
   import Button, { Label } from "@smui/button";
+
   let email = "";
   let password = "";
   let inputValues = {
@@ -34,19 +36,12 @@
           });
           return;
         }
-
         localStorage.setItem("usertoken", res.token);
         uid = jwtdecode(res.token).uid;
 
-        return fetch(`http://localhost:3333/api/users/${uid}`)
-          .then(res => {
-            return res.json();
-          })
-          .then(res => {
-            isLoggedIn.update(status => (status = true));
-            console.log($isLoggedIn);
-            return res;
-          });
+        return fetchUser(uid).then(res => {
+          goto(`/user/${$loggedInUser.username}`);
+        });
       });
   };
 </script>
@@ -98,7 +93,10 @@
 <section class="login">
   <div class="form__wrap">
     <form on:submit|preventDefault={handleSubmit} class="form">
-      <h1>Login to <span class="primary-highlight">DooIt</span></h1>
+      <h1>
+        Login to
+        <span class="primary-highlight">DooIt</span>
+      </h1>
       <div>
         <Textfield
           type="text"
