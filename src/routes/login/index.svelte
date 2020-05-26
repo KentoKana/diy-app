@@ -6,6 +6,7 @@
   import Textfield from "@smui/textfield";
   import Button, { Label } from "@smui/button";
   import Spinner from "svelte-spinner";
+  import { onMount } from "svelte";
 
   let email = "";
   let password = "";
@@ -17,6 +18,16 @@
   let uid;
   let buttonLabel = "Login";
   let isSubmitting = false;
+  let token;
+  onMount(() => {
+    token = localStorage.getItem("usertoken");
+    if (token) {
+      token = jwtdecode(token);
+      return fetchUser(token.uid).then(res => {
+        goto(`/user/${res.user.username.toLowerCase()}`);
+      });
+    }
+  });
   const handleSubmit = () => {
     buttonLabel = "Logging you in...";
     isSubmitting = true;
@@ -45,7 +56,6 @@
         }
         localStorage.setItem("usertoken", res.token);
         uid = jwtdecode(res.token).uid;
-
         return fetchUser(uid).then(res => {
           goto(`/user/${$loggedInUser.username}`);
         });
@@ -126,7 +136,9 @@
           {/if}
         </div>
         <div class="submit-button">
-          <Button disabled={isSubmitting} variant="unelevated" type="submit">{buttonLabel}</Button>
+          <Button disabled={isSubmitting} variant="unelevated" type="submit">
+            {buttonLabel}
+          </Button>
         </div>
       </div>
     </form>
