@@ -1,7 +1,7 @@
 import { loggedInUser, isLoggedIn } from "../stores/user-store.js";
 
-export const fetchUser = async (uid) => {
-    return await fetch(`http://localhost:3333/api/users/${uid}`)
+export const fetchUserByJWT = async (jwt) => {
+    return await fetch(`http://localhost:3333/api/users/${jwt}`)
         .then(res => {
             return res.json();
         })

@@ -1,7 +1,6 @@
 <script>
   import { loggedInUser, isLoggedIn } from "../../stores/user-store.js";
-  import { fetchUser } from "../../utils/fetch-data";
-  import jwtdecode from "jwt-decode";
+  import { fetchUserByJWT } from "../../utils/fetch-data";
   import { goto } from "@sapper/app";
   import { onMount } from "svelte";
   import Spinner from "svelte-spinner";
@@ -10,8 +9,7 @@
   onMount(async () => {
     jwt = localStorage.getItem("usertoken");
     if (jwt) {
-      const uid = jwtdecode(jwt).uid;
-      fetchUser(uid);
+      fetchUserByJWT(jwt);
     } else {
       goto("/login");
     }

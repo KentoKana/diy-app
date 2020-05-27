@@ -32,4 +32,4 @@ Route.get('/api/create/category', 'CategoryController.createCategory')
 Route
     .post('api/login', 'UserController.login')
 Route
-    .get('api/users/:id', 'UserController.showAuthenticatedUser')
+    .get('api/users/:jwt', 'UserController.showAuthenticatedUser')

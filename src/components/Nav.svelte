@@ -1,6 +1,6 @@
 <script>
   import jwtdecode from "jwt-decode";
-  import { fetchUser } from "../utils/fetch-data.js";
+  import { fetchUserByJWT } from "../utils/fetch-data.js";
   import { onMount } from "svelte";
   import { loggedInUser, isLoggedIn } from "../stores/user-store.js";
 
@@ -11,8 +11,7 @@
   onMount(() => {
     token = localStorage.getItem("usertoken");
     if (token) {
-      token = jwtdecode(token);
-      fetchUser(token.uid).then(res => {
+      fetchUserByJWT(token).then(res => {
         isLoggedIn.update(status => true);
         loggedInUser.update(() => {
           return {

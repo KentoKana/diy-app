@@ -2,7 +2,7 @@
   import { goto } from "@sapper/app";
   import jwtdecode from "jwt-decode";
   import { loggedInUser, isLoggedIn } from "../../stores/user-store.js";
-  import { fetchUser } from "../../utils/fetch-data.js";
+  import { fetchUserByJWT } from "../../utils/fetch-data.js";
   import Textfield from "@smui/textfield";
   import Button, { Label } from "@smui/button";
   import Spinner from "svelte-spinner";
@@ -18,12 +18,11 @@
   let uid;
   let buttonLabel = "Login";
   let isSubmitting = false;
-  let token;
+  let jwt;
   onMount(() => {
-    token = localStorage.getItem("usertoken");
-    if (token) {
-      token = jwtdecode(token);
-      return fetchUser(token.uid).then(res => {
+    jwt = localStorage.getItem("usertoken");
+    if (jwt) {
+      return fetchUserByJWT(jwt).then(res => {
         goto(`/user/${res.user.username.toLowerCase()}`);
       });
     }
@@ -55,8 +54,7 @@
           return;
         }
         localStorage.setItem("usertoken", res.token);
-        uid = jwtdecode(res.token).uid;
-        return fetchUser(uid).then(res => {
+        return fetchUserByJWT(res.token).then(res => {
           goto(`/user/${$loggedInUser.username}`);
         });
       });

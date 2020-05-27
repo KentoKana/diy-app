@@ -1,4 +1,6 @@
 'use strict'
+const jwtdecode = require('jwt-decode')
+
 const { validateAll } = use('Validator')
 
 class UserController {
@@ -60,8 +62,8 @@ class UserController {
     }
 
     showAuthenticatedUser = async ({ params, response }) => {
-
-        const user = await this.User.find(params.id)
+        const uid = jwtdecode(params.jwt).uid
+        const user = await this.User.find(uid)
         if (user) {
             return response.status(200).json({
                 user
