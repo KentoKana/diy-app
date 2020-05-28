@@ -1,5 +1,4 @@
 <script>
-  import jwtdecode from "jwt-decode";
   import { fetchUserByJWT } from "../utils/fetch-data.js";
   import { onMount } from "svelte";
   import { loggedInUser, isLoggedIn } from "../stores/user-store.js";

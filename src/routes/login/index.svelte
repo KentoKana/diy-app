@@ -1,6 +1,5 @@
 <script>
   import { goto } from "@sapper/app";
-  import jwtdecode from "jwt-decode";
   import { loggedInUser, isLoggedIn } from "../../stores/user-store.js";
   import { fetchUserByJWT } from "../../utils/fetch-data.js";
   import Textfield from "@smui/textfield";
@@ -142,7 +141,7 @@
     </form>
     <p>
       Don't have an account? Register
-      <a href="@">here</a>
+      <a href="#">here</a>
       !
     </p>
   </div>

@@ -1,6 +1,5 @@
 'use strict'
 const jwtdecode = require('jwt-decode')
-
 const { validateAll } = use('Validator')
 
 class UserController {
