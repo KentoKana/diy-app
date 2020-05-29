@@ -1,5 +1,4 @@
 'use strict'
-const jwtdecode = require('jwt-decode')
 const { validateAll } = use('Validator')
 
 class UserController {
@@ -55,22 +54,15 @@ class UserController {
         }
         const { email, password } = request.only(['email', 'password'])
         const token = await auth.attempt(email, password)
-        console.log(token)
         return response.json(token)
 
     }
 
-    showAuthenticatedUser = async ({ params, response }) => {
-        const uid = jwtdecode(params.jwt).uid
-        const user = await this.User.find(uid)
-        if (user) {
-            return response.status(200).json({
-                user
-            })
-        } else {
-            return response.status(200).json({
-                error: "User not found"
-            })
+    showAuthenticatedUser = async ({ auth }) => {
+        try {
+            return await auth.getUser()
+        } catch (error) {
+            return { error: "Missing or Invalid Token" }
         }
     }
 
@@ -78,7 +70,7 @@ class UserController {
         const username = params.username
         const user = await this.User.query().where('username', username).fetch()
         return user.rows[0]
-      
+
     }
 
 }

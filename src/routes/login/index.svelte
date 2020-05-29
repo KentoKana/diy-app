@@ -19,14 +19,12 @@
   let isSubmitting = false;
   let jwt;
 
-  if ($isLoggedIn) {
-    goto(`/`);
-  }
   onMount(() => {
     jwt = localStorage.getItem("usertoken");
     if (jwt) {
       return fetchUserByJWT(jwt).then(res => {
-        goto(`/user/${res.user.username}`);
+        uid = res.id;
+        goto(`/user/${res.username}`);
       });
     }
   });
@@ -108,46 +106,48 @@
     rel="stylesheet"
     href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 </svelte:head>
-<section class="login">
-  <div class="form__wrap">
-    <form on:submit|preventDefault={handleSubmit} class="form">
-      <h1>
-        Login to
-        <span class="primary-highlight">DooIt</span>
-      </h1>
-      <div>
-        <Textfield
-          type="text"
-          name="email"
-          label="E-mail"
-          bind:value={inputValues.email}
-          id="email" />
-        <div class="validation-message">
-          {#if validationMessages.email !== ''}{validationMessages.email}{/if}
+{#if process.browser && !jwt && !uid}
+  <section class="login">
+    <div class="form__wrap">
+      <form on:submit|preventDefault={handleSubmit} class="form">
+        <h1>
+          Login to
+          <span class="primary-highlight">DooIt</span>
+        </h1>
+        <div>
+          <Textfield
+            type="text"
+            name="email"
+            label="E-mail"
+            bind:value={inputValues.email}
+            id="email" />
+          <div class="validation-message">
+            {#if validationMessages.email !== ''}{validationMessages.email}{/if}
+          </div>
         </div>
-      </div>
-      <div>
-        <Textfield
-          type="password"
-          name="password"
-          label="Password"
-          bind:value={inputValues.password} />
-        <div class="validation-message">
-          {#if validationMessages.password !== ''}
-            {validationMessages.password}
-          {/if}
+        <div>
+          <Textfield
+            type="password"
+            name="password"
+            label="Password"
+            bind:value={inputValues.password} />
+          <div class="validation-message">
+            {#if validationMessages.password !== ''}
+              {validationMessages.password}
+            {/if}
+          </div>
+          <div class="submit-button">
+            <Button disabled={isSubmitting} variant="unelevated" type="submit">
+              {buttonLabel}
+            </Button>
+          </div>
         </div>
-        <div class="submit-button">
-          <Button disabled={isSubmitting} variant="unelevated" type="submit">
-            {buttonLabel}
-          </Button>
-        </div>
-      </div>
-    </form>
-    <p>
-      Don't have an account? Register
-      <a href="#">here</a>
-      !
-    </p>
-  </div>
-</section>
+      </form>
+      <p>
+        Don't have an account? Register
+        <a href="#">here</a>
+        !
+      </p>
+    </div>
+  </section>
+{/if}

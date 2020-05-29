@@ -6,14 +6,20 @@ import { loggedInUser, isLoggedIn } from "../stores/user-store.js";
  * @returns { Promise } User Object based on JWT 
  */
 export const fetchUserByJWT = async (jwt) => {
-    return await fetch(`http://localhost:3333/api/users/${jwt}`)
+    return await fetch(`http://localhost:3333/api/jwtAuthenticate`, {
+        method: "GET",
+        withCredentials: true,
+        headers: {
+            "Authorization": `Bearer ${jwt}`,
+        }
+    })
         .then(res => {
             return res.json();
         })
         .then(res => {
             isLoggedIn.update(status => (status = true));
             loggedInUser.update(() => {
-                return res.user
+                return res
             });
             return res;
         });

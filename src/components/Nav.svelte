@@ -14,10 +14,10 @@
         isLoggedIn.update(status => true);
         loggedInUser.update(() => {
           return {
-            ...res.user
+            ...res
           };
         });
-        user = res.user;
+        user = res;
       });
     }
   });
