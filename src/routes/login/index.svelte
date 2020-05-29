@@ -18,6 +18,10 @@
   let buttonLabel = "Login";
   let isSubmitting = false;
   let jwt;
+
+  if ($isLoggedIn) {
+    goto(`/`);
+  }
   onMount(() => {
     jwt = localStorage.getItem("usertoken");
     if (jwt) {

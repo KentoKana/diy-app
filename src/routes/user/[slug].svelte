@@ -1,7 +1,7 @@
 <script>
   import UserCard from "../../components/user-profile/UserCard.svelte";
   import { loggedInUser, isLoggedIn } from "../../stores/user-store.js";
-  import { fetchUserByJWT, fetchUserByUsername } from "../../utils/fetch-data";
+  import { fetchUserByUsername } from "../../utils/fetch-data";
   import { goto } from "@sapper/app";
   import { onMount } from "svelte";
   import Spinner from "svelte-spinner";
