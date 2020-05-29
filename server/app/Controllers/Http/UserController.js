@@ -72,7 +72,13 @@ class UserController {
                 error: "User not found"
             })
         }
+    }
 
+    getUserByUsername = async ({ params, response }) => {
+        const username = params.username
+        const user = await this.User.query().where('username', username).fetch()
+        return user.rows[0]
+      
     }
 
 }

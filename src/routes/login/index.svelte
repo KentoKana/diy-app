@@ -22,10 +22,11 @@
     jwt = localStorage.getItem("usertoken");
     if (jwt) {
       return fetchUserByJWT(jwt).then(res => {
-        goto(`/user/${res.user.username.toLowerCase()}`);
+        goto(`/user/${res.user.username}`);
       });
     }
   });
+
   const handleSubmit = () => {
     buttonLabel = "Logging you in...";
     isSubmitting = true;

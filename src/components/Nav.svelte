@@ -14,7 +14,7 @@
         isLoggedIn.update(status => true);
         loggedInUser.update(() => {
           return {
-            username: res.user.username
+            ...res.user
           };
         });
         user = res.user;
@@ -22,7 +22,7 @@
     }
   });
   const logout = () => {
-	isLoggedIn.update(status=> false)
+    isLoggedIn.update(status => false);
     return localStorage.setItem("usertoken", "");
   };
 </script>
@@ -114,7 +114,7 @@
         <a
           rel="prefetch"
           aria-current={segment === `user` ? 'page' : undefined}
-          href={`/user/${$loggedInUser.username.toLowerCase()}`}>
+          href={`/user/${$loggedInUser.username}`}>
           Hello, {$loggedInUser.username}!
         </a>
       </li>

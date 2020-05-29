@@ -30,6 +30,9 @@ Route.get('/api/create/category', 'CategoryController.createCategory')
 
 //Login
 Route
-    .post('api/login', 'UserController.login')
+    .post('/api/login', 'UserController.login')
 Route
-    .get('api/users/:jwt', 'UserController.showAuthenticatedUser')
+    .get('/api/users/:jwt', 'UserController.showAuthenticatedUser')
+
+//Get User by Username 
+Route.get('/api/getUserByUsername/:username', 'UserController.getUserByUsername')

@@ -1,6 +1,7 @@
 <script>
   import Button from "@smui/button";
-  export let user;
+  export let userProfileOwner;
+  export let loggedInUserIsProfileOwner
 </script>
 
 <style lang="scss">
@@ -12,7 +13,7 @@
     align-items: center;
     text-align: center;
     max-width: 400px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     padding: 30px;
     border-radius: $border-radius-lg;
 
@@ -49,11 +50,13 @@
       <img class="profile-picture" src="./images/banner-image.jpg" alt="" />
     </div>
   </div>
-  <h1>{user.username}</h1>
+  <h1>{userProfileOwner.username}</h1>
   <p class="user-description">
     Some dood who loves building DIY projects in his spare time
   </p>
-  <div class="follow-user-btn">
-    <Button class="follow-user-btn" variant="outlined">+ Follow</Button>
-  </div>
+  {#if !loggedInUserIsProfileOwner}
+    <div class="follow-user-btn">
+      <Button class="follow-user-btn" variant="outlined">+ Follow</Button>
+    </div>
+  {/if}
 </div>
