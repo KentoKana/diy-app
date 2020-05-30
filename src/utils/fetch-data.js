@@ -17,10 +17,8 @@ export const fetchUserByJWT = async (jwt) => {
             return res.json();
         })
         .then(res => {
-            isLoggedIn.update(status => (status = true));
-            loggedInUser.update(() => {
-                return res
-            });
+            isLoggedIn.set(true);
+            loggedInUser.set(res);
             return res;
         });
 }

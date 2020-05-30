@@ -1,7 +1,7 @@
 <script>
   import Button from "@smui/button";
   export let userProfileOwner;
-  export let loggedInUserIsProfileOwner
+  export let loggedInUserIsProfileOwner;
 </script>
 
 <style lang="scss">
@@ -16,6 +16,15 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     padding: 30px;
     border-radius: $border-radius-lg;
+    position: relative;
+
+    .fas.fa-edit {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      font-size: 1.2em;
+      color: $secondary-color;
+    }
 
     .profile-picture {
       &__container {
@@ -45,6 +54,11 @@
 </style>
 
 <div class="user-profile-card">
+  {#if loggedInUserIsProfileOwner}
+    <a href="/user/Toocan">
+      <i class="fas fa-edit" />
+    </a>
+  {/if}
   <div class="profile-picture__container">
     <div class="profile-picture__holder">
       <img class="profile-picture" src="./images/banner-image.jpg" alt="" />

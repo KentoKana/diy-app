@@ -11,18 +11,14 @@
     token = localStorage.getItem("usertoken");
     if (token) {
       fetchUserByJWT(token).then(res => {
-        isLoggedIn.update(status => true);
-        loggedInUser.update(() => {
-          return {
-            ...res
-          };
-        });
+        isLoggedIn.set(true);
+        loggedInUser.set(res);
         user = res;
       });
     }
   });
   const logout = () => {
-    isLoggedIn.update(status => false);
+    isLoggedIn.set(false);
     return localStorage.setItem("usertoken", "");
   };
 </script>
@@ -73,6 +69,13 @@
   }
 </style>
 
+<svelte:head>
+  <link
+    rel="stylesheet"
+    href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+    crossorigin="anonymous" />
+</svelte:head>
 <nav>
   <ul>
     <li>
@@ -106,6 +109,13 @@
           aria-current={segment === 'login' ? 'page' : undefined}
           href="login">
           login
+        </a>
+      </li>
+      <li>
+        <a
+          href="/register"
+          aria-current={segment === 'register' ? 'page' : undefined}>
+          register
         </a>
       </li>
     {/if}

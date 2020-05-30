@@ -118,19 +118,21 @@
           <Textfield
             type="text"
             name="email"
-            label="E-mail"
+            label="E-mail*"
             bind:value={inputValues.email}
-            id="email" />
-          <div class="validation-message">
-            {#if validationMessages.email !== ''}{validationMessages.email}{/if}
-          </div>
+            invalid={validationMessages.email} />
+          {#if validationMessages.email !== ''}
+            <div class="validation-message">{validationMessages.email}</div>
+          {/if}
         </div>
         <div>
           <Textfield
             type="password"
             name="password"
-            label="Password"
-            bind:value={inputValues.password} />
+            label="Password*"
+            bind:value={inputValues.password}
+            invalid={validationMessages.password} />
+
           <div class="validation-message">
             {#if validationMessages.password !== ''}
               {validationMessages.password}
